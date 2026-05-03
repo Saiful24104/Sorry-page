@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I am sorry</title>
+    <style>
+        body { text-align: center; font-family: sans-serif; padding-top: 50px; }
+        button { padding: 15px 30px; font-size: 18px; margin: 10px; cursor: pointer; }
+        #yesBtn { background-color: #4CAF50; color: white; border: none; }
+        #noBtn { background-color: #f44336; color: white; border: none; position: absolute; }
+    </style>
+</head>
+<body>
+
+
+    <h1>I am really sorry. Will you forgive me?</h1>
+
+
+    <button id="yesBtn" onclick="alert('Yay! Thank you!')">Forgive me</button>
+    <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">Not forgive me</button>
+
+
+    <script>
+        function moveButton() {
+            var btn = document.getElementById('noBtn');
+            btn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+            btn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+        }
+    </script>
+</body>
+</html>
