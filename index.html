@@ -1,30 +1,125 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I am sorry</title>
+    <title>For Nuzhuuuuuu</title>
     <style>
-        body { text-align: center; font-family: sans-serif; padding-top: 50px; }
-        button { padding: 15px 30px; font-size: 18px; margin: 10px; cursor: pointer; }
-        #yesBtn { background-color: #4CAF50; color: white; border: none; }
-        #noBtn { background-color: #f44336; color: white; border: none; position: absolute; }
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6e6; /* Soft pink background */
+            text-align: center;
+            overflow: hidden; /* Prevents scrolling when the button runs away */
+        }
+        h1 {
+            color: #ff4d4d;
+            margin-bottom: 30px;
+            padding: 0 20px;
+            transition: all 0.3s ease; /* Makes the text growth smooth */
+        }
+        .btn-container {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            z-index: 10;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        #yesBtn {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+        #noBtn {
+            background-color: #ff4d4d;
+            color: white;
+        }
+        .success-gif {
+            max-width: 80%;
+            border-radius: 15px;
+            display: none;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 
+    <h1 id="question">Will you forgive me? 🥺</h1>
 
-    <h1>I am really sorry. Will you forgive me?</h1>
+    <div class="btn-container" id="btnContainer">
+        <button id="yesBtn" onclick="sayYes()">Yes</button>
+        <button id="noBtn" onclick="sayNo()">No</button>
+    </div>
 
-
-    <button id="yesBtn" onclick="alert('Yay! Thank you!')">Forgive me</button>
-    <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">Not forgive me</button>
-
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaG13aXIwZW1peXpxNzN2cXoxN2F6eXlxN2pxN2Z6N3F6N3F6N3F6ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Vz58J8shFW6BvqnYTm/giphy.gif" alt="Cute hug" class="success-gif" id="hugGif">
 
     <script>
-        function moveButton() {
-            var btn = document.getElementById('noBtn');
-            btn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
-            btn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+        let noCount = 0;
+        const questionText = document.getElementById('question');
+        const noBtn = document.getElementById('noBtn');
+        const btnContainer = document.getElementById('btnContainer');
+        const hugGif = document.getElementById('hugGif');
+
+        // The text sequence for every time she clicks "No"
+        const noResponses = [
+            "Will you forgive me? 🥺",
+            "Are you sure? 😟",
+            "Pleaseeeeeee ? 😭",
+            "PLEASEEEEEEE ?? 😭😭",
+            "PLEASEEEEEEE !!!!!!! 😭😭😭",
+            "Okay I am not taking no for an answer! 😤"
+        ];
+
+        function sayNo() {
+            noCount++;
+            
+            if (noCount < noResponses.length - 1) {
+                // Change text and make it bigger
+                questionText.innerText = noResponses[noCount];
+                let currentSize = parseFloat(window.getComputedStyle(questionText).fontSize);
+                questionText.style.fontSize = (currentSize + 6) + 'px';
+            } else {
+                // The final stage: Button runs away
+                questionText.innerText = noResponses[noResponses.length - 1];
+                noBtn.style.position = 'absolute';
+                
+                // Triggers movement on both touch (mobile) and click/hover (desktop)
+                noBtn.addEventListener('touchstart', moveButton);
+                noBtn.addEventListener('mouseover', moveButton);
+                moveButton(); 
+            }
+        }
+
+        function moveButton(e) {
+            if(e) e.preventDefault(); // Stops her from being able to tap it easily
+            
+            // Calculates a random spot on the screen
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 20);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 20);
+            
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+
+        function sayYes() {
+            // The success screen!
+            questionText.innerText = "Thank you Nuzhuuuuuu love youuuuu ❤️❤️❤️";
+            questionText.style.fontSize = '32px';
+            btnContainer.style.display = 'none'; // Hides the buttons
+            hugGif.style.display = 'block'; // Shows the GIF
         }
     </script>
 </body>
